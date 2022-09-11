@@ -1,0 +1,117 @@
+<div class="body">
+
+  <div class="container" [ngClass]="panel ? 'right-panel-active' : '' " id="container">
+
+    <div class="form-container sign-up-container">
+
+      <form [formGroup]="form" (ngSubmit)="register()">
+
+        <h1>Create Account</h1>
+        <div>
+
+          <div>
+            <mat-form-field>
+              <input matInput placeholder="Username" formControlName="username">
+              <mat-error
+                *ngIf="loginForm.get('username')?.invalid && (loginForm.get('username')?.dirty || loginForm.get('username')?.touched) && loginForm.get('username')?.errors?.required">
+                Username is required
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Email" formControlName="email">
+              <mat-error
+                *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched) && loginForm.get('email')?.errors?.required">
+                Email is required
+              </mat-error>
+              <mat-error *ngIf="!loginForm.get('email')?.errors?.required && (loginForm.get('email')?.errors?.pattern)">
+                Please enter a valid email address
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field>
+              <input matInput type="password" placeholder="Password" formControlName="password">
+              <mat-error *ngIf="!loginForm.get('password')?.errors?.required">
+                Password length must be greater than or equal to 8 and password must contain one or more uppercase ,
+                lowercase , numeric and special characters
+              </mat-error>
+              <mat-error
+                *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched) && loginForm.get('password')?.errors?.required">
+                Password is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <button [disabled]="!loginForm.valid" mat-raised-button color="primary" mat-button>Sign Up</button>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+
+
+
+  <div class="form-container sign-in-container">
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+      <h1>Sign in</h1>
+
+      <div>
+
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Email" formControlName="email">
+            <mat-error *ngIf="!loginForm.get('email')?.errors?.required && (loginForm.get('email')?.errors?.pattern)">
+              Please enter a valid email address
+            </mat-error>
+            <mat-error
+              *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched) && loginForm.get('email')?.errors?.required">
+              Email is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input matInput type="password" placeholder="Password" formControlName="password">
+            <mat-error *ngIf="!loginForm.get('password')?.errors?.required">
+              Password length must be greater than or equal to 8 and password must contain one or more uppercase ,
+              lowercase , numeric and special characters
+            </mat-error>
+            <mat-error
+              *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched) && loginForm.get('password')?.errors?.required">
+              Password is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <a href="#">Forgot your password?</a>
+        <div>
+          <button [disabled]="!loginForm.valid" mat-raised-button color="primary" mat-button>Sign In</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="overlay-container">
+
+    <div class="overlay">
+
+      <div class="overlay-panel overlay-left">
+        <h1>Welcome Back!</h1>
+        <p>To keep connected with us please login with your personal info</p>
+        <button class="ghost" id="signIn" (click)="panel = !panel" mat-stroked-button>Sign In</button>
+      </div>
+
+      <div class="overlay-panel overlay-right">
+        <h1>Hello, Friend!</h1>
+        <p>Enter your personal details and start journey with us</p>
+        <button class="ghost" id="signUp" (click)="panel = !panel" mat-stroked-button>Sign Up</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  </div>
+
+</div>
